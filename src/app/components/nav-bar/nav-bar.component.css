@@ -1,0 +1,11 @@
+.nav-link{
+    transition: all 0.5s;
+}
+
+.nav-link:active{
+    transform: rotate(90deg);
+}
+
+.nav-link:focus{
+    transform: rotate(90deg);
+}

@@ -1,0 +1,60 @@
+
+  <div class="card" style="max-height: 450px;"
+       infiniteScroll
+       [infiniteScrollDistance]="2"
+       (scrolled)="onScroll()"
+       [scrollWindow]="false">
+    <div class="card-header" *ngIf="gridItems && gridItems.length > 0">
+      <div class="row justify-content-between">
+        <div class="col-sm-4 col-md-6 col-lg-6">
+          <mat-form-field>
+            <input matInput [(ngModel)]="FILTER" type="text" placeholder="Buscar">
+          </mat-form-field>
+        </div>
+        <div class="col-sm-3 col-md-2 col-lg-2 text-right">
+          <span class="badge badge-pill badge-info">Total: {{gridItems.length}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="card-table table table-striped table-hover">
+        <thead>
+        <tr>
+          <th *ngIf="gridAction != null && gridAction.length > 0" >Ação</th>
+          <th *ngFor="let detail of gridDetail">
+            <a (click)="order(detail.columnField)" class="mousePointer">
+              {{detail.columnLabel}}
+              <i *ngIf="orderBy !== detail.columnField" class="fas fa-sort"></i>
+              <i *ngIf="orderBy === detail.columnField && reverse" class="fas fa-sort-down"></i>
+              <i *ngIf="orderBy === detail.columnField && !reverse" class="fas fa-sort-up"></i>
+            </a>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of gridItems|searchFilter: FILTER; let gridIndex = index"
+            [ngStyle]="{'width' : tableWidth}">
+          <ng-template [ngIf]="item">
+            <td *ngIf="gridAction!= null && gridAction.length > 0" class="p-0">
+              <span *ngFor="let action of gridAction; let acti = index">
+                <i *ngIf="action.condition(item, gridIndex)"
+                   (click)="functionOnClick(action, acti, item)"
+                   data-toggle="tooltip"
+                   title="{{action.name}}"
+                   class="{{action.icon}}">
+                  <img *ngIf="action.urlImg" src="{{action.urlImg}}" height="{{action.heightImg}}"  width="{{action.widthImg}}" alt="Icone">
+                </i>
+              </span>
+            </td>
+            <td *ngFor="let detail of gridDetail">
+              {{item[detail.columnField]}}
+              <div *ngIf="detail.columnField == null" class="text-left">
+                <ng-container *ngTemplateOutlet="lineHeaderTmpl; context:item"></ng-container>
+              </div>
+            </td>
+          </ng-template>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

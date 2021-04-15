@@ -1,0 +1,31 @@
+<div class="logo">
+    <a routerLink="/" class="simple-text">
+        <i class="material-icons" style="color: rgb(46, 179, 46) ;">face</i>
+        Projeto Teste
+    </a>
+</div>
+<div class="sidebar-wrapper">
+    <ul class="nav">
+        <li class="nav-item" routerLinkActive="active">
+            <a routerLink="/employees" class="nav-link">
+                <i class="material-icons">assignment</i>
+                <p>Funcionários</p>
+            </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active ">
+            <a routerLink="/search" class="nav-link">
+                <i class="material-icons">search</i>
+                <p>Procurar</p>
+            </a>
+        </li>
+        <li class="nav-item active-pro">
+            <a class="nav-link">
+                <i class="material-icons">query_builder</i>
+                <p>
+                    {{data | date: 'dd/MM/yyy'}} -
+                    {{horas | date: 'HH:mm:ss' : 'GMT-4'}}
+                </p>
+            </a>
+        </li>
+    </ul>
+</div>

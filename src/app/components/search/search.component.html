@@ -1,0 +1,57 @@
+<div class="main-content">
+    <div @fade class="container">
+
+        <div class="text-center mt-5 mb-5">
+            <button routerLink="/" mat-raised-button class="btn btn-warning btn-link btn-lg btn-just-icon">
+                <i class="material-icons">face</i>
+            </button>
+        </div>
+
+        <form ngNativeValidate (submit)="searchEmployee()" class="row d-flex justify-content-center">
+            <div class="form-row align-items-center">
+                <div class="col-auto my-1">
+                    <div class="input-group">
+                        <input mask='000.000.000-00' class="form-control" name="cpf" placeholder="CPF" [(ngModel)]="employee.cpf" required>
+                        <div class="input-group-append">
+                            <button matTooltip="Procurar" [matTooltipPosition]="'above'" mat-raised-button class="btn btn-info btn-round btn-just-icon" type="submit">
+                                <i class="material-icons">search</i>
+                                <div class="ripple-container"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="row justify-content-md-center text-center">
+            <div class="col-md-auto">
+                <div class="card" *ngIf="existEmployee" @fade>
+                    <div class="card-header card-header-success">
+                        <h4 class="card-title">Funcionário {{employee.id}}</h4>
+                    </div>
+                    <div class="card-body ">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="text-primary">
+                                    <th>Nome</th>
+                                    <th>Salário</th>
+                                    <th>Bonus</th>
+                                    <th>Total</th>
+                                </thead>
+                                <tbody class="">
+                                    <tr>
+                                        <td>{{employee.name}}</td>
+                                        <td>{{employee.salary}}</td>
+                                        <td>{{employee.bonus}}</td>
+                                        <td>{{employee.salary + employee.bonus}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <button *ngIf="existEmployee" @fade mat-raised-button class="btn btn-outline-danger" type="button" (click)="existEmployee = false">Limpar</button>
+            </div>
+        </div>
+    </div>
+</div>

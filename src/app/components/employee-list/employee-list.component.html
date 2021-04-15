@@ -1,0 +1,93 @@
+<div class="main-content">
+    <div @fade class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-primary">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <span class="nav-tabs-title">Funcionários:</span>
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link active" href="#employees" data-toggle="tab">
+                                            <i class="material-icons">person</i> Empregados
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link" href="#supervisors" data-toggle="tab">
+                                            <i class="material-icons">supervisor_account</i> Supervisores
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link" href="#managers" data-toggle="tab">
+                                            <i class="material-icons">build</i> Gerentes
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- <h4 class="card-title ">Funcionários</h4>
+                        <p class="card-category"> Funcionários contratados pela empresa</p> -->
+                    </div>
+                    <div class="card-body">
+                    <button mat-raised-button class="btn btn-secondary btn-round btn-block border" (click)="openNewModal()">Novo Funcionário</button>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="employees">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="text-primary">
+                                    <th>#</th>
+                                    <th>Nome</th>
+                                    <th>CPF</th>
+                                    <th>Salário</th>
+                                    <th>Bônus</th>
+                                    <th class="text-center">Ações</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let employee of employeeService.employees;let i=index;" @fade
+                                        [id]="'tr'+i">
+                                        <td>{{employee.id}}</td>
+                                        <td>{{employee.name}}</td>
+                                        <td>{{employee.cpf | mask: '000.000.000-00'}}</td>
+                                        <td [salaryColor]="employee.salary">{{employee.salary | myCurrency}}</td>
+                                        <td>{{employee.bonus | myCurrency}}</td>
+                                        <td class="td-actions text-center">
+                                            <button (click)="openEditModal(employee)" mat-raised-button type="button"
+                                                matTooltip="Editar" [matTooltipPosition]="'above'"
+                                                class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                            <button (click)="openDestroyModal(employee)" mat-raised-button type="button"
+                                                matTooltip="Remover" [matTooltipPosition]="'above'"
+                                                class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        </div>
+                        <div class="tab-pane" id="supervisors">
+                            Empty
+                        </div>
+                        <div class="tab-pane" id="managers">
+                            Empty
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<employee-new-modal (onSubmit)="onNewEmployee($event)" (onError)="onError($event)"></employee-new-modal>
+
+<employee-edit-modal [employee]="employeeToEdit" (onSubmit)="onEditEmployee($event)"></employee-edit-modal>
+
+<employee-delete-modal [employee]="employeeToDelete" (onDestroy)="onDestroyEmployee($event)"></employee-delete-modal>

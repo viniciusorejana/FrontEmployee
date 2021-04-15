@@ -1,0 +1,40 @@
+<form ngNativeValidate (submit)="addEmployee()">
+    <div class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Novo Funcionário</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <mat-form-field>
+                            <input matInput name="name" placeholder="Nome do Funcionário" [(ngModel)]="employee.name" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field>
+                            <input matInput mask='000.000.000-00' name="cpf" placeholder="CPF" [(ngModel)]="employee.cpf" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field>
+                            <input matInput name="salary" type="number" placeholder="Salário do Funcionário" [(ngModel)]="employee.salary" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group" *ngIf="employee.salary <= 500">
+                        <mat-form-field>
+                            <input matInput name="bonus" type="number" placeholder="Bônus" [(ngModel)]="employee.bonus">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button mat-raised-button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button mat-raised-button type="submit" class="btn btn-primary">Incluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
